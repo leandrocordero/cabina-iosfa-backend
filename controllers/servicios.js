@@ -60,7 +60,7 @@ updateService: async(req, res = response)=>{
     
     try {
         
-        const evento = await Servicio.findById( id );
+        const servicio = await Servicio.findById( id );
 
       
         if( !servicio ){
