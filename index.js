@@ -47,7 +47,6 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use( express.json() );
 
 app.use('/api/auth', require('./rutes/auth'));
-app.use('/api/events',require('./rutes/events'));
 app.use('/api/services',require('./rutes/services'));
 
 
