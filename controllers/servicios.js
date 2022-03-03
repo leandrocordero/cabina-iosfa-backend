@@ -48,7 +48,9 @@ const serviciosController = {
             return res.status(201).json({
                 ok: true,
                 msg:'Servicio Creado',
-                servicio
+                servicio:{
+                    estado: servicio.estado
+                }
             })
 
 

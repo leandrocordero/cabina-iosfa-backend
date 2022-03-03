@@ -8,7 +8,7 @@ const ServicioSchema = Schema({
     },
     diagnostico:{
         type:String,
-        required:true
+        required:false
     },
     domicilio: {
         type:String,
@@ -32,7 +32,7 @@ const ServicioSchema = Schema({
     },
     localidad:{
         type:String,
-        required: true
+        required: false
     },
     nombre: {
         type:String,
@@ -44,7 +44,7 @@ const ServicioSchema = Schema({
     },
     provincia:{
         type:String,
-        required:true
+        required:false
     },
     ubicacion:{
         type:Object,
