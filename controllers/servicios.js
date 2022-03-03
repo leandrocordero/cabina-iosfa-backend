@@ -67,16 +67,12 @@ const serviciosController = {
 },
 getServicios: async(req, res = response)=>{
 
-const servicios = await Servicio.find()
-                            .populate('user','name');
-
-
-
+const servicios = await Servicio.find();
+  
 return res.status(200).json({
     ok:"true",
     servicios
 })
-
 
 },
 
