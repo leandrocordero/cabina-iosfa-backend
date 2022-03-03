@@ -29,7 +29,7 @@ const serviciosController = {
 
             servicio.domicilioNormalizado = formattedAddress;
             servicio.localidad = city;
-            servicio.provincia = administrativeLevels.level2long;
+            servicio.provincia = administrativeLevels.level1long;
             
             
         } catch (error) {
