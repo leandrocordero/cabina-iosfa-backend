@@ -18,8 +18,6 @@ router.post('/newService',[
     check('fecha','fecha debe tener formato fecha').custom( isDate ),
     check('nombre','nombre es obligatorio').not().isEmpty(),
     check('color','color es obligatorio').not().isEmpty(),
-    check('domicilio','domicilio es obligatorio').not().isEmpty(),
-    check('localidad','localidad es obligatorio').not().isEmpty(),
     validarCampos
 ],setServicio )
 

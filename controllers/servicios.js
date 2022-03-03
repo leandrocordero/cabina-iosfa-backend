@@ -2,7 +2,15 @@
 const { response } = require('express');
 const Servicio = require('../database/models/Servicio');
 const { find } = require('../database/models/Servicio');
+const NodeGeocoder = require('node-geocoder');
 //const Evento = require('../database/models/Evento');
+
+const options = {
+    provider: 'google',
+    apiKey: process.env.GOOGLE_MAPS_API_KEY,
+  };
+  
+  const geocoder = NodeGeocoder(options);
 
 const serviciosController = {
 
@@ -10,10 +18,26 @@ const serviciosController = {
       setServicio: async(req,res = 
         response)=>{
 
-       
+        
         //const { fecha, nombre, color, domicilio, localidad } = req.body
         const { uid } = req;
         servicio = new Servicio( req.body )
+
+        try {
+            const ubicacion = await geocoder.reverse({ lat: req.body.ubicacion.lat, lon: req.body.ubicacion.long });
+            const { formattedAddress, city, administrativeLevels } = ubicacion[0];
+
+            servicio.domicilioNormalizado = formattedAddress;
+            servicio.localidad = city;
+            servicio.provincia = administrativeLevels.level2long;
+            
+            
+        } catch (error) {
+
+            console.log(error)
+            
+        }
+
 
         try {
             
@@ -81,12 +105,9 @@ updateService: async(req, res = response)=>{
 
         }
 
-        const nuevoServicio = {
-            ...req.body,
-            user: uid
-        }
+       const estado = req.body.estado
 
-        const servicioActualizado = await Servicio.findOneAndUpdate(id, nuevoServicio, {new:true})
+       const servicioActualizado = await Servicio.updateOne({ _id: id },{$set: {"estado": estado}})
 
         return res.status(200).json({
             ok:"true",

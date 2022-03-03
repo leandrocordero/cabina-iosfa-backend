@@ -34,7 +34,33 @@ const ServicioSchema = Schema({
     localidad:{
         type:String,
         required: true
+    },
+
+    user:{
+        type:String,
+        required: true
+    },
+
+    estado:{
+        type:String,
+        required:true
+    },
+
+    ubicacion:{
+        type:Object,
+        required: true
+    },
+
+    provincia:{
+        type:String,
+        required:true
+    },
+
+    domicilioNormalizado:{
+        type:String,
+        required:true
     }
+    
 });
 
 ServicioSchema.method('toJSON', function(){
