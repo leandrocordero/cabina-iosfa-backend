@@ -1,32 +1,32 @@
 
 const { response } = require('express');
-//const { find } = require('../database/models/Evento');
+const Servicio = require('../database/models/Servicio');
+const { find } = require('../database/models/Servicio');
 //const Evento = require('../database/models/Evento');
 
-const eventsController = {
+const serviciosController = {
 
     
-      setEvent: async(req,res = 
+      setServicio: async(req,res = 
         response)=>{
 
        
-        const { title, notes, start, end } = req.body
+        //const { fecha, nombre, color, domicilio, localidad } = req.body
         const { uid } = req;
-
-        
-        evento = new Evento( req.body )
+        servicio = new Servicio( req.body )
 
         try {
             
-            evento.user = uid;
+            servicio.user = uid;
 
-            await evento.save();
+            await servicio.save();
 
             return res.status(201).json({
                 ok: true,
-                msg:'Evento Creado',
-                evento
+                msg:'Servicio Creado',
+                servicio
             })
+
 
         } catch (error) {
             
@@ -38,16 +38,16 @@ const eventsController = {
 
         }
 },
-getEvents: async(req, res = response)=>{
+getServicios: async(req, res = response)=>{
 
-const eventos = await Evento.find()
+const servicios = await Servicio.find()
                             .populate('user','name');
 
 
 
 return res.status(200).json({
     ok:"true",
-    eventos
+    servicios
 })
 
 
@@ -159,4 +159,4 @@ deleteEvent: async(req, res = response)=>{
 
 }
 
-module.exports = eventsController;
+module.exports = serviciosController;
