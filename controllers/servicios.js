@@ -110,12 +110,11 @@ updateService: async(req, res = response)=>{
 
        const estado = req.body.estado
 
-       const servicioActualizado = await Servicio.updateOne({ _id: id },{$set: {"estado": estado}})
+       await Servicio.updateOne({ _id: id },{$set: {"estado": estado}})
 
         return res.status(200).json({
             ok:"true",
             msg:"Servicio Actualizado",
-            servicio: servicioActualizado
         })
     
 
