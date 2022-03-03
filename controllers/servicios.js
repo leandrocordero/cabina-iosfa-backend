@@ -49,6 +49,7 @@ const serviciosController = {
                 ok: true,
                 msg:'Servicio Creado',
                 servicio:{
+                    id: servicio.id,
                     estado: servicio.estado
                 }
             })
