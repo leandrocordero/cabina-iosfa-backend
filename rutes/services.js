@@ -1,7 +1,7 @@
 const { Router } = require('express');
 const { check } = require('express-validator');
 const router = Router();
-const { getServicios, setServicio, updateEvent, deleteEvent } = require('../controllers/servicios');
+const { getServicios, setServicio, deleteEvent, updateService } = require('../controllers/servicios');
 
 const { isDate } = require('../helpers/isDate');
 const validarCampos = require('../middlewares/validar-campos');
@@ -27,12 +27,10 @@ router.post('/newService',[
 router.get('/getServices',getServicios )
 
 //actualizar evento
-router.put('/updateEvent/:id',[
-    check('title','titulo es obligatorio').not().isEmpty(),
-    check('start','Fecha de inicio es obligatoria').custom( isDate ),
-    check('end','Fecha de inicio es obligatoria').custom( isDate ),
+router.put('/updateService/:id',[
+    check('id','id es obligatorio').not().isEmpty(),
     validarCampos
-],updateEvent )
+],updateService )
 
 //eleminar evento
 router.delete('/deleteEvent/:id',deleteEvent )

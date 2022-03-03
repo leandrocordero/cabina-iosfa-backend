@@ -53,17 +53,17 @@ return res.status(200).json({
 
 },
 
-updateEvent: async(req, res = response)=>{
+updateService: async(req, res = response)=>{
 
     const id = req.params.id;
     const uid = req.uid;
     
     try {
         
-        const evento = await Evento.findById( id );
+        const evento = await Servicio.findById( id );
 
       
-        if( !evento ){
+        if( !servicio ){
 
             return res.status(404).json({
                 ok: false,
@@ -72,7 +72,7 @@ updateEvent: async(req, res = response)=>{
             });
         }
 
-      if( evento.user.toString() !== uid ){
+      if( servicio.user.toString() !== uid ){
 
             return res.status(401).json({
                 ok: false,
@@ -81,17 +81,17 @@ updateEvent: async(req, res = response)=>{
 
         }
 
-        const nuevoEvento = {
+        const nuevoServicio = {
             ...req.body,
             user: uid
         }
 
-        const eventoActualizado = await Evento.findOneAndUpdate(id, nuevoEvento, {new:true})
+        const servicioActualizado = await Servicio.findOneAndUpdate(id, nuevoServicio, {new:true})
 
         return res.status(200).json({
             ok:"true",
-            msg:"Evento Actualizado",
-            evento: eventoActualizado
+            msg:"Servicio Actualizado",
+            servicio: servicioActualizado
         })
     
 
