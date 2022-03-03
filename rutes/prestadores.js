@@ -10,7 +10,6 @@ const { setComentario,
 const { isDate } = require('../helpers/isDate');
 const validarCampos = require('../middlewares/validar-campos');
 const { validarJwt } = require('../middlewares/validar-jwt');
-const { createConversation } = require('../controllers/twilio');
 
 
 router.use(validarJwt)

@@ -6,7 +6,6 @@ const { getEvents, setEvent, updateEvent, deleteEvent } = require('../controller
 const { isDate } = require('../helpers/isDate');
 const validarCampos = require('../middlewares/validar-campos');
 const { validarJwt } = require('../middlewares/validar-jwt');
-const { getCoords } = require('../controllers/geoCoder');
 
 //event routes
 
@@ -35,7 +34,6 @@ router.put('/updateEvent/:id',[
 //eleminar evento
 router.delete('/deleteEvent/:id',deleteEvent )
 
-router.get('/getCoords',getCoords)
 
 
 
