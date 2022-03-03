@@ -10,7 +10,7 @@ const options = {
     apiKey: process.env.GOOGLE_MAPS_API_KEY,
   };
   
-  const geocoder = NodeGeocoder(options);
+const geocoder = NodeGeocoder(options);
 
 const serviciosController = {
 
@@ -84,14 +84,10 @@ updateService: async(req, res = response)=>{
     try {
         
         const servicio = await Servicio.findById( id );
-
-      
         if( !servicio ){
-
             return res.status(404).json({
                 ok: false,
                 msg: 'id incorrecto o inexistente'
-
             });
         }
 
@@ -104,9 +100,10 @@ updateService: async(req, res = response)=>{
 
         }
 
-       const estado = req.body.estado
+       const estado = req.body.estado;
+       const diagnostico = req.body.diagnostico;
 
-       await Servicio.updateOne({ _id: id },{$set: {"estado": estado}})
+       await Servicio.updateOne({ _id: id },{$set: {"estado": estado, "diagnostico": diagnostico}})
 
         return res.status(200).json({
             ok:"true",
