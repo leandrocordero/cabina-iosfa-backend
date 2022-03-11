@@ -30,10 +30,13 @@ io.on('connection', (socket) => {
   });
 });
 
+
+
 //escuchar peticiones
 server.listen( PORT, ()=>{
   console.log(`CORS - HABILITADO. Servidor http corriendo en puerto ${ PORT }`)}
 );
+
 
 app.use(cors())
 

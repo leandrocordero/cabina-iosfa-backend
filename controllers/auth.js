@@ -22,6 +22,16 @@ const authController = {
                 });
             }
 
+            if(usuario.status === 'INACTIVO'){
+
+                return res.status(400).json({
+
+                    ok: false,
+                    msg: 'Cuenta Pendiente de Autorización'
+
+                });
+            }
+
             //validar password
 
             const validPassword = bcrypt.compareSync(password, usuario.password);
@@ -36,13 +46,15 @@ const authController = {
             }
     
             //generar jwt
-            const token = await generarJwt(usuario.id, usuario.name, usuario.photoURL);
+            const token = await generarJwt(usuario.id, usuario.name, usuario.photoURL, usuario.empresa, usuario.status );
 
             res.json({
                 ok: true,
                 uid: usuario.id,
-                name: usuario.name,
-                photoURL: usuario.photoURL,
+                user:{name: usuario.name,
+                      avatar: usuario.photoURL,
+                      empresa: usuario.empresa},
+                status: usuario.status,                
                 token
             })
 
@@ -64,7 +76,7 @@ const authController = {
         
             try{
 
-                const { email, password, photoURL } = req.body;
+                const { email, password } = req.body;
                 let usuario =  await Usuario.findOne({ email });
             
                 if(usuario){
@@ -77,7 +89,7 @@ const authController = {
                     });
                 }
         
-                usuario = new Usuario( {...req.body, photoURL:''} );
+                usuario = new Usuario( {...req.body, photoURL:'', status:'INACTIVO'} );
                 
             //Encriptar password
             
@@ -89,16 +101,18 @@ const authController = {
 
                 //generar jwt
 
-                const token = await generarJwt(usuario.id, usuario.name, usuario.photoURL);
+                const token = await generarJwt(usuario.id, usuario.name, usuario.photoURL, usuario.empresa, usuario.status);
 
                 
                 res.status(201).json({
                     ok: true,
                     uid: usuario.id,
-                    name: usuario.name,
-                    token,
-                    photoURL   
-                    
+                    user:{name: usuario.name,
+                      avatar: usuario.photoURL,
+                      empresa: usuario.empresa},
+                    status: usuario.status,                
+                    token
+                   
                 })
             }catch(error){
                 console.log(error)
@@ -179,16 +193,17 @@ const authController = {
 
       socketAuth: async(req, res=response)=>{
 
-        const token = await generarJwt(req.uid, req.name, req.photoURL);
-
+        const token = await generarJwt(req.uid, req.name, req.photoURL, req.empresa, req.status);
+        
         res.status(201).json({
             ok: true,
             uid: req.uid,
-            name: req.name,
-            photoURL: req.photoURL,
+            user:{name: req.name,
+                  avatar: req.photoURL,
+                  empresa: req.empresa},
+            status: req.status,
             token
-               
-            
+                
         })
 
 
@@ -201,14 +216,16 @@ const authController = {
             const uid = req.uid;
             const name = req.name;
             const photoURL = req.photoURL
+            const empresa = req.empresa
             
-            const token = await generarJwt(uid, name, photoURL)
+            const token = await generarJwt(uid, name, photoURL, empresa)
 
             res.json({
             ok: true,
             token,
             name,
             uid,
+            emrepsa,
             photoURL
             
 

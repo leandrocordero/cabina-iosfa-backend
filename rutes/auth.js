@@ -11,7 +11,7 @@ router.post('/',
             [
             check('email','el email es campo obligatorio').not().isEmpty(),
             check('email','El email debe tener el formato correcto').isEmail(),
-            check('password','El pasword debe tener 6 caracteres o mas').isLength({min: 6, max: 6}),
+            check('password','El pasword debe tener 6 caracteres o mas').isLength({min: 6}),
             validarCampos
             ],
             loguin )
@@ -20,7 +20,8 @@ router.post('/new',
             [check('name','el nombre es campo obligatorio').not().isEmpty(),
              check('email','el email es campo obligatorio').not().isEmpty(),
              check('email','El email debe tener el formato correcto').isEmail(),
-             check('password','El pasword debe tener 6 caracteres o mas').isLength({min: 6, max: 6}),
+             check('password','El pasword debe tener 6 caracteres o mas').isLength({min: 6}),
+             check('empresa','la empresa es campo obligatorio').not().isEmpty(),
              validarCampos
              ],
              createNew )

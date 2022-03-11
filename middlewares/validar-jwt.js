@@ -19,11 +19,13 @@ try {
     
 const tokens = jwt.verify(token, process.env.SECRET_JWT_SEED);
 
-const { uid, name, photoURL } = tokens
+const { uid, name, photoURL, status, empresa } = tokens
 
 req.uid = uid;
 req.name = name;
 req.photoURL = photoURL;
+req.empresa = empresa;
+req.status = status;
 
 } catch (error) {
     return res.status(401).json({

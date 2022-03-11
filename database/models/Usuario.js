@@ -28,6 +28,20 @@ const UsuarioSchema = Schema({
         type:String,
         required:true
 
+    },
+
+    empresa:{
+
+        type:String,
+        required:true
+
+    },
+
+    status:{
+
+        type:String,
+        required:true
+
     }
 
 

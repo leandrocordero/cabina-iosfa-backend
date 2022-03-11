@@ -20,7 +20,7 @@ const serviciosController = {
 
         
         //const { fecha, nombre, color, domicilio, localidad } = req.body
-        const { uid } = req;
+        const { uid, empresa } = req;
         servicio = new Servicio( req.body )
 
         try {
@@ -42,6 +42,9 @@ const serviciosController = {
         try {
             
             servicio.user = uid;
+            servicio.empresa = empresa;
+
+            console.log(servicio)
 
             await servicio.save();
 
@@ -68,11 +71,15 @@ const serviciosController = {
 getServicios: async(req, res = response)=>{
 
 const servicios = await Servicio.find();
-  
+
+console.log(servicios);
+
+
 return res.status(200).json({
     ok:"true",
     servicios
 })
+
 
 },
 

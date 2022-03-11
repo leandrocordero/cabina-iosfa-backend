@@ -49,7 +49,12 @@ const ServicioSchema = Schema({
     ubicacion:{
         type:Object,
         required: true
-    }
+    },
+    empresa:{
+        type:Object,
+        required: true
+    },
+
 });
 
 ServicioSchema.method('toJSON', function(){
