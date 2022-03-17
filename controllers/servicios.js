@@ -3,6 +3,7 @@ const { response } = require('express');
 const Servicio = require('../database/models/Servicio');
 const { find } = require('../database/models/Servicio');
 const NodeGeocoder = require('node-geocoder');
+const { informarRegistro } = require('../sockets/socketController');
 //const Evento = require('../database/models/Evento');
 
 const options = {
@@ -44,10 +45,11 @@ const serviciosController = {
             servicio.user = uid;
             servicio.empresa = empresa;
 
-            console.log(servicio)
-
+           
             await servicio.save();
 
+            await informarRegistro(servicio)
+            
             return res.status(201).json({
                 ok: true,
                 msg:'Servicio Creado',
@@ -72,7 +74,6 @@ getServicios: async(req, res = response)=>{
 
 const servicios = await Servicio.find();
 
-console.log(servicios);
 
 
 return res.status(200).json({

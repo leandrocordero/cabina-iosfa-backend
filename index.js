@@ -20,15 +20,10 @@ const io = require('socket.io')(server, {
       methods: ["GET", "POST"]
     }});
 
+global.io = io;
     //inicializacion de DB
  dbConection();
-
-io.on('connection', (socket) => {
-  console.log('a user connected');
-  socket.on('disconnect', () => {
-    console.log('user disconnected');
-  });
-});
+ io.on('connection', ( socket ) => socketControler(socket, io));  
 
 
 
