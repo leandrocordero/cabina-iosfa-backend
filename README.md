@@ -1,6 +1,6 @@
 "# cabina-iosfa-backend" 
 
-Istrucciones de instalacion y puesta en marcha
+Instrucciones de instalacion y puesta en marcha
 
 Clonar repo >>> git clone https://github.com/leandrocordero/cabina-iosfa-backend.git
 Instalar paquetes de node >>> npm install
