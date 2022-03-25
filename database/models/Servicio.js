@@ -26,6 +26,10 @@ const ServicioSchema = Schema({
         type:String,
         required:true
     },
+    cierre:{
+        type:String,
+        required:false
+    },
     fecha: {
         type:Date,
         required:true

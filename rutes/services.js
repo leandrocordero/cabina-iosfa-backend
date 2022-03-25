@@ -1,7 +1,7 @@
 const { Router } = require('express');
 const { check } = require('express-validator');
 const router = Router();
-const { getServicios, setServicio, deleteEvent, updateService } = require('../controllers/servicios');
+const { getServicios, setServicio, deleteEvent, updateService, getStats, getGamStats, getVittalStats } = require('../controllers/servicios');
 
 const { isDate } = require('../helpers/isDate');
 const validarCampos = require('../middlewares/validar-campos');
@@ -12,7 +12,7 @@ const { validarJwt } = require('../middlewares/validar-jwt');
 //aplicando middleware a la ruta
 
 router.use( validarJwt)
-//crear evento
+//crear servicio
 router.post('/newService',[
     check('fecha','fecha es obligatorio').not().isEmpty(),
     check('fecha','fecha debe tener formato fecha').custom( isDate ),
@@ -22,7 +22,9 @@ router.post('/newService',[
 ],setServicio )
 
 //obtener eventos
-router.get('/getServices',getServicios )
+router.post('/getServices',getServicios )
+router.post('/getGamStats',getGamStats )
+router.post('/getVittalStats',getVittalStats )
 
 //actualizar evento
 router.put('/updateService/:id',[
